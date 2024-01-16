@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+{% load static %}
+<!---Main Start---->
+<div class="row mt-4 mx-auto p-5">
+  {% for x in products %}
+  <div class="col-md-4">
+    <img src="{{x.pimage.url}}" width="450" height="350" alt="">
+  </div>
+  <div class="col-md-8 mx-auto">
+    <p style="font-family: Times New Roman;font-size: xx-large;text-align: left; margin-right: 250;"><b>{{x.name}}</b>
+    </p>
+    <p><b>RS. {{x.price}}</b></p>
+    <p><b><u>Metal Details</u></b></p>
+    <p>Metal Type: &nbsp; &nbsp; &nbsp; &nbsp; {{x.Metal_Type}}</p>
+    <p>Metal Weight(g): &nbsp; &nbsp; &nbsp; {{x.Weight_gm}}</p>
+    <a href="/addtocart/{{x.id}}" class="btn btn-secondary">ADD TO CART</a>
+    <a href="/viewcart" class="btn btn-secondary">VIEW CART</a>
+    <a href="/home" class="btn btn-secondary">BUY NOW</a>
+  </div>
+  {% endfor %}
+  
+  {% if success %}
+  <div class="alert alert-success">
+    {{success}}
+  </div>
+  {% endif %}
+  {% if errmsg %}
+  <div class="alert alert-danger">
+    {{errmsg}}
+  </div>
+  {% endif %}
+</div>
+<!---Main End---->
+
+
+
+{% endblock 'main' %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+
+<!---Main Section--->
+<!----Marquee Start----->
+<marquee width="100%" direction="left" height="50px"
+    style="font-size: x-large; font-family: Script Font; font-style: italic; font-weight: 200; margin-top: auto; margin-top: 1;">
+    Make it memorable and special. Jewellery that's as beautiful as you are. We're not just jewellery. We're your
+    story.!!!
+</marquee>
+
+<!----Marquee End----->
+{% if emailsend %}
+<div class="alert alert-success text-center">
+    {{emailsend}}
+</div>
+{% endif %}
+<!---Carosel---->
+<div class="container mt-0">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../static/assets/images/I3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../static/assets/images/I4.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../static/assets/images/I5.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+
+
+<!-----Carousel End---->
+
+<div class="row mt-1">
+
+    <!----Filter side bar start--->
+    <div class="col-md-2 p-5">
+        <h4 style="margin-left: 40px; margin-top: 150px;">Filters</h4>
+        <hr>
+        <h5><b>-</b>Product Type</h5>
+        <hr>
+       
+        <div>
+            <a href="/pfilter/1" style="text-align: center; text-decoration: none; color: black;">Ring</a><br>
+            <a href="/pfilter/2">Bracelets</a><br>
+            <a href="/pfilter/3">Earring</a><br>
+            <a href="/pfilter/4">Chain</a><br>
+            <a href="/pfilter/5">Ancklates</a><br>
+            <a href="/pfilter/6">Necklace</a><br>
+        </div>
+        <br>
+        <h5><b>-</b>Filter By Price</h5>
+        <hr>
+        <form action="/range">
+            <div class="mb-3">
+                <label for="" class="form-label">Min Val</label>
+                <input type="number" name="min" class="form-control" placeholder="Minimum value">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Max Val</label>
+                <input type="number" name="max" class="form-control" placeholder="Maximun value">
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn bg-black text-white">
+            </div>
+        </form>
+    </div>
+    <!---Filter bar end------>
+    <div class="col-10">
+        <h3 style="text-align: center; font-family: Abril; font-size: x-large; margin-right: 250px;"><b><u>Our
+                    Jewellery</u></b></h3><br>
+        <div class="row">
+            {% for x in products %}
+            <div class="col-3">
+                <!---Card 1----->
+                <div class="card border-0" style="width: 80%; margin: auto;">
+                    <img src="{{x.pimage.url}}" height="200px" alt="...">
+                    <div class="card-body">
+                        <a href="/pdetails/{{x.id}}"
+                            style="text-align: center; text-decoration: none;margin-left: 80px; color: black;">&nbsp;&nbsp;{{x.name}}</a>
+                        <p style="text-align: center;">Rs. {{x.price}}</p>
+                        {% if x.Cat == 1 %}
+                        <p style="text-align: center; margin-bottom: 50PX;">Gold</p>
+                        {% elif x.Cat == 2 %}
+                        <p style="text-align: center; margin-bottom: 50PX;">Silver</p>
+                        {% else %}
+                        <p style="text-align: center; margin-bottom: 50PX;">Dimond</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!----About Us------>
+    <div class="row">
+        {% include 'about.html' %}
+    </div>
+
+
+
+    <!---Main Section End---->
+
+    {% endblock 'main' %}

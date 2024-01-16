@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+{% load static %}
+<!---Cart Start---->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-5">
+            <h4 class="bg-secondary text-white p-2">Cart Item</h4><br>
+            {% for x in data %}
+            <div class="row">
+                <div class="col-md-4">
+                  <img src="{{x.pid.pimage.url}}" width="100%" height="250">
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-7">
+                    <p style="font-family: Times New Roman;font-size: x-large;text-align: left; margin-right: 250;text-transform:uppercase; "><b>{{x.pid.name}}</b></p>
+                    <p><b>Rs. {{x.pid.price}}</b></p>
+                    <p><b><u>Metal Details</u></b></p>
+                    <p>Metal Type: &nbsp; &nbsp; &nbsp; &nbsp; {{x.pid.Metal_Type}}</p>
+                    <p>Metal Weight(g): &nbsp; &nbsp; &nbsp; {{x.pid.Weight_gm}}</p>
+                    <p>
+                        <b>Qty:</b>
+                        <a href="/updateqty/0/{{x.id}}"><button class="btn btn-secondary">-</button></a>
+                        <input type="number"  class="input"  style="width: 10%; height: 30px; text-align: center;"  value="{{x.qty}}">
+                        <a href="/updateqty/1/{{x.id}}"><button class="btn btn-secondary">+</button></a>&nbsp;&nbsp;&nbsp;
+                        <a href="/remove/{{x.id}}" class="btn btn-secondary">Remove from cart</a>
+                        
+                    </p>
+                </div>
+           </div><br><br>
+           {% endfor %}
+        </div>
+        <div class="col-md-4 mt-5">
+            {% for x in data %}
+            {% if forloop.counter == 1 %}
+            <h4 class="bg-secondary text-white p-2">Customer Details</h4><br>
+            <p><b>Name:</b>&nbsp;&nbsp;&nbsp;{{x.uid.username}}</p> 
+            <p><b>Email ID:</b>&nbsp;&nbsp;&nbsp;{{x.uid.email}}</p><br>
+            {% endif %}
+            {% endfor %}
+            <h4 class="bg-secondary text-white p-2">Total Amount</h4><br>
+            <p><b>Total Items ({{items}}): </b>Rs. {{total}}</p> 
+            <hr>
+            <p><b>Total Amount: </b>Rs. {{total}}</p>
+            <a href="/placeorder"><button class="btn btn-secondary">Place Order</button></a>
+        </div>
+    </div>
+</div><br>
+
+    
+
+
+<!----Cart End----->
+
+
+
+{% endblock 'main' %}
